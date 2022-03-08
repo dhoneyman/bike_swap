@@ -28,10 +28,10 @@ Listing.init(
             type: DataTypes.DATE,
             allowNull: false
         },
-        photo: {
-            type: DataTypes.BLOB,
-            allowNull: false
-        },
+        // photo: {
+        //     type: DataTypes.BLOB,
+        //     allowNull: true
+        // },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -45,8 +45,8 @@ Listing.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'listing',
+        modelName: 'listings',
     }
 );
 
-module.export = Listing;
+module.exports = Listing;

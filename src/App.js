@@ -1,6 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 
+const listings = () => {
+  fetch('http://localhost:3001/')
+  .then(responce => responce.json())
+  .then(data => console.log(data));
+}
+
+listings();
+
 function App() {
   return (
     <div className="App">
