@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { json } = require('express');
-const withAuth = require('../utils/auth');
+// const withAuth = require('../../client/src/utils/auth');
 const { User, Listing } = require('../models');
 const cors = require('cors');
 
