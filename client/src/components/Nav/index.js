@@ -1,11 +1,11 @@
 import React from "react";
-import Auth from "../../utils/auth";
-// const Auth = require('../../utils/auth')
+import withAuth from "../../utils/auth";
+// const withAuth = require('../../utils/auth')
 import { Link } from "react-router-dom";
 
 function Nav() {
   function showNavigation() {
-    // if (Auth.loggedIn()) {
+    // if (withAuth.loggedIn()) {
       return (
         <ul className="flex-row">
           <li className="mx-1">
@@ -16,23 +16,21 @@ function Nav() {
           </li>
           <li className="mx-1">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
-            </a>
+            <Link to='/logout'>Logout</Link>
           </li>
         </ul>
       );
     // } else {
-      return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/signup">Signup</Link>
-          </li>
-          <li className="mx-1">
-            <Link to="/login">Login</Link>
-          </li>
-        </ul>
-      );
+    //   return (
+    //     <ul className="flex-row">
+    //       <li className="mx-1">
+    //         <Link to="/signup">Signup</Link>
+    //       </li>
+    //       <li className="mx-1">
+    //         <Link to="/login">Login</Link>
+    //       </li>
+    //     </ul>
+    //   );
     // }
   }
 
@@ -53,7 +51,7 @@ function Nav() {
       <nav className="right">
         <div className="nav-wrapper">
           <Link className="brand-logo" to="/">
-            Paddle
+            Bike Swap
           </Link>
           <div className="right hide-on-med-and-down" style={styles.navBar}>
             {showNavigation()}

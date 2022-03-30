@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import {UserContext} from '../UserContext';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 
 function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user, setUser } = useContext(UserContext);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
       const response = await fetch('/api/users/login',{
         method: 'POST',
-        body: JSON.stringify( formState.email, formState.password ),
+        body: JSON.stringify( {email: formState.email, password: formState.password} ),
         headers: { 'Content-Type': 'application/json' },
       });
-
+      setIsLoggedIn(true);
+      
       if (response.ok) {
         document.location.replace('/profile');}
+        const user = formState.email;
+        setUser(user);
+        console.log('user', user)
       // const token = mutationResponse.data.login.token;
       // Auth.login(token);
     } catch (e) {
@@ -67,6 +73,9 @@ function Login(props) {
           <button type="submit">Submit</button>
         </div>
       </form>
+      <div>
+      {JSON.stringify(user, null, 2)}
+      </div>
     </div>
   );
 }

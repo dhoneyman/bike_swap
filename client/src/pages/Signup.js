@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
+import {UserContext} from '../UserContext'
 
 function Signup(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
-//   const [addUser] = useMutation(ADD_USER);
-
+  const { user, setUser } = useContext(UserContext);
+  
   const handleFormSubmit = async (event) => {
-    console.log(formState);
-
     event.preventDefault();
-    const responce = await fetch('/api/users',{
+    const responce = await fetch('/api/users/signup',{
       method: 'POST',
-      body: JSON.stringify( formState ),
+      body: JSON.stringify( {first_name: user.first_name, last_name: user.last_name, email: user.email, password: user.password} ),
       headers: { 'Content-Type': 'application/json' }
     });
-    // window.location.assign('/');
-    // const token = mutationResponse.data.addUser.token;
-    // Auth.login(token);
+    console.log('user',user);
+
+    window.location.assign('/profile');
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormState({
-      ...formState,
+    setUser({
+      ...user,
       [name]: value,
     });
   };
@@ -80,6 +79,9 @@ function Signup(props) {
           <button type="submit">Submit</button>
         </div>
       </form>
+      <div>
+      {JSON.stringify(user, null, 2)}
+      </div>
     </div>
   );
 }
